@@ -42,7 +42,6 @@ app.use(express.static(path.join(__dirname, "public")));
 async function assignAdminRole(uid) {
   try {
     await admin.auth().setCustomUserClaims(uid, { admin: true });
-    console.log("Assigned successfully");
   } catch (error) {
     console.error("Error assigning admin role:", error);
     throw new Error("Failed to assign admin role");
@@ -151,9 +150,7 @@ app.delete("/admin/users/:id", validateAdminAccess, async (req, res) => {
 app.get("/admin/users/details/:id", validateAdminAccess, async (req, res) => {
   try {
     const userId = req.params.id;
-    console.log(userId);
     const userDoc = await db.collection("users").doc(userId).get();
-    console.log(userDoc);
     if (!userDoc.exists) {
       return res.status(404).json({ error: "User not found" }); // JSON response
     }
@@ -189,7 +186,6 @@ app.get("/validateAdmin", validateToken, async (req, res) => {
     const userUid = req.user.uid;
 
     const userRecord = await admin.auth().getUser(userUid);
-    console.log(userRecord.customClaims);
     if (userRecord.customClaims?.admin) {
       return res.status(200).json({ message: "User is an admin" });
     } else {
@@ -283,7 +279,7 @@ app.post("/nonAdminRequest", async (req, res) => {
 });
 
 // Fetch exam details
-app.get("/admin/exams/:examId", async (req, res) => {
+app.get("/admin/exams/:examId", validateAdminAccess, async (req, res) => {
   const { examId } = req.params;
 
   try {
@@ -298,7 +294,7 @@ app.get("/admin/exams/:examId", async (req, res) => {
 });
 
 // Approve or reject users
-app.post("/admin/users/:id", async (req, res) => {
+app.post("/admin/users/:id", validateAdminAccess, async (req, res) => {
   const userId = req.params.id;
   const { action } = req.body;
 
@@ -316,22 +312,8 @@ app.post("/admin/users/:id", async (req, res) => {
   }
 });
 
-app.get("/admin/exams/:examId", async (req, res) => {
-  const { examId } = req.params;
-
-  try {
-    const examDoc = await db.collection("exams").doc(examId).get();
-
-    if (!examDoc.exists) return res.status(404).send("Exam not found");
-
-    res.json({ id: examId, ...examDoc.data() });
-  } catch (error) {
-    res.status(500).send("Failed to fetch exam details");
-  }
-});
-
 // Route to fetch and display all exams
-app.get("/admin/all-exams", async (req, res) => {
+app.get("/admin/all-exams", validateAdminAccess, async (req, res) => {
   try {
     const examsSnapshot = await db.collection("exams").get();
     const exams = examsSnapshot.docs.map((doc) => ({
@@ -348,7 +330,7 @@ app.get("/admin/all-exams", async (req, res) => {
 });
 
 // Route to approve an exam
-app.post("/admin/approve-exam/:id", async (req, res) => {
+app.post("/admin/approve-exam/:id", validateAdminAccess, async (req, res) => {
   const { id } = req.params;
   try {
     await db
@@ -363,7 +345,7 @@ app.post("/admin/approve-exam/:id", async (req, res) => {
 });
 
 // Route to delete an exam
-app.post("/admin/delete-exam/:id", async (req, res) => {
+app.post("/admin/delete-exam/:id", validateAdminAccess, async (req, res) => {
   const { id } = req.params;
   try {
     await db.collection("exams").doc(id).delete();
@@ -375,7 +357,7 @@ app.post("/admin/delete-exam/:id", async (req, res) => {
 });
 
 // Route to view a single exam
-app.get("/admin/view-exam/:id", async (req, res) => {
+app.get("/admin/view-exam/:id", validateAdminAccess, async (req, res) => {
   const { id } = req.params;
   try {
     const examDoc = await db.collection("exams").doc(id).get();
@@ -403,7 +385,6 @@ const getResults = async (userId, examId, resId) => {
       .doc(resId)
       .get()
   ).data();
-  // console.log(exam);
   const user = (await db.collection("users").doc(userId).get()).data();
   const examData = (await db.collection("exams").doc(examId).get()).data();
   const examTitle = examData.title || "";
