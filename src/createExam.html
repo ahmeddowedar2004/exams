@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>إنشاء إختبار</title>
+    <link rel="stylesheet" href="/css/framework.css" />
+    <link rel="stylesheet" href="/css/output.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <body class="bg-gray-100 font-sans">
+      <div class="max-w-4xl mx-auto p-6 bg-white shadow-lg mt-10 rounded-lg">
+        <h1 class="text-2xl font-bold text-gray-800 mb-4">
+          أنشئ إختباراً جديداً
+        </h1>
+
+        <!-- Exam Type Selection -->
+        <div class="mb-6">
+          <label class="block font-semibold text-gray-600 mb-2"
+            >إختر نوع الاختبار</label
+          >
+          <select
+            id="examType"
+            class="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-orange-500">
+            <option value="" disabled selected>اختر نوع الاختبار</option>
+            <option value="multiple-choice">إختيار من متعدد</option>
+            <option value="true/false">صح أو خطأ</option>
+          </select>
+        </div>
+
+        <form id="examForm" class="space-y-4 hidden">
+          <!-- Exam Title -->
+          <div>
+            <label for="subject" id="selectSubject">Select Subject:</label>
+            <select id="subject" name="subject">
+              <option value="" disabled selected>-- Select Subject --</option>
+              <option value="علم نفس النمو">علم نفس النمو</option>
+              <option value="تاريخ التربية والتعليم">
+                تاريخ التربية والتعليم
+              </option>
+              <option value="نمذجة ومحاكاة">نمذجة ومحاكاة</option>
+              <option value="استخدام جداول الكترونيه">
+                استخدام جداول الكترونيه
+              </option>
+              <option value="نظم تشغيل 2">نظم تشغيل 2</option>
+              <option value="برمجة 1">برمجة 1</option>
+              <option value="هياكل البيانات والخوارزميات">
+                هياكل البيانات والخوارزميات
+              </option>
+              <option value="تدريس مصغر">تدريس مصغر</option>
+              <option value="الويب الدلالي">الويب الدلالي</option>
+              <option value="ثقافة فنون موسيقية">ثقافة فنون موسيقية</option>
+              <option value="شبكات الحاسب">شبكات الحاسب</option>
+            </select>
+
+            <br /><br />
+            <div>
+              <label for="custom">مادة أخرى</label>
+              <input
+                type="radio"
+                name="subjectname"
+                id="custom"
+                class="subject-radio"
+                value="custom" />
+              <label for="selection">اختر مادة</label>
+              <input
+                type="radio"
+                name="subjectname"
+                id="selection"
+                class="subject-radio"
+                value="selection"
+                checked />
+            </div>
+            <input
+              type="text"
+              disabled
+              id="examTitle"
+              class="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-orange-500"
+              placeholder="إدخل اسم المادة" />
+          </div>
+          <!-- Exam Timer -->
+          <div>
+            <label for="examTimer" class="block font-semibold text-gray-600"
+              >مدة الاختبار (دقائق)</label
+            >
+            <input
+              type="number"
+              id="examTimer"
+              class="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-orange-500"
+              placeholder="مدة الاختبار (e.g., 60)"
+              min="1"
+              required />
+          </div>
+
+          <!-- Questions Section -->
+          <div id="questionsContainer" class="space-y-4">
+            <h2 class="text-xl font-semibold text-gray-700">الاسئلة</h2>
+          </div>
+
+          <!-- Add Question Button -->
+          <button
+            id="addQuestionBtn"
+            type="button"
+            class="px-4 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600">
+            إضافة سؤال
+          </button>
+
+          <!-- Submit Button -->
+          <button
+            type="submit"
+            id="submitExam"
+            class="w-full px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 disabled:cursor-not-allowed disabled:bg-disabled">
+            أنشئ إختباراً
+          </button>
+        </form>
+      </div>
+      <script src="/prod/createExam.prod.js"></script>
+    </body>
+  </body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/framework.css" />
+    <link rel="stylesheet" href="/css/output.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer" />
+  </head>
+  <body class="bg-gray-100">
+    <div class="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md mt-10">
+      <h1 class="text-2xl font-bold text-gray-800 mb-4">لوحة التحكم</h1>
+
+      <!-- Section: Exams -->
+      <div>
+        <h2 class="text-lg font-semibold text-gray-700">
+          الاختبارات التي قمت بانشاءها
+        </h2>
+        <div id="examList" class="space-y-4 mt-4"></div>
+      </div>
+
+      <hr class="my-6 border-gray-300" />
+      <div>
+        <h2 class="text-lg font-semibold text-gray-700">
+          الاختبارات التي قمت بحلها
+        </h2>
+        <div id="solvedExamsContainer" class="space-y-4 mt-4"></div>
+      </div>
+
+      <hr class="my-6 border-gray-300" />
+
+      <div>
+        <h2 class="text-lg font-semibold text-gray-700">إدارة حسابك</h2>
+        <div class="mt-4 space-y-4">
+          <button
+            id="updatePasswordBtn"
+            class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+            تغيير كلمة المرور
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="/prod/user.prod.js"></script>
+  </body>
+</html>

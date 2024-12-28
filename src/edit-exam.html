@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>إنشاء إختبار</title>
+    <link rel="stylesheet" href="/css/framework.css" />
+    <link rel="stylesheet" href="/css/build.min.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <body class="bg-gray-100 font-sans">
+      <div class="max-w-4xl mx-auto p-6 bg-white shadow-lg mt-10 rounded-lg">
+        <h1 class="text-2xl font-bold text-gray-800 mb-4">
+          أنشئ إختباراً جديداً
+        </h1>
+
+        <!-- Exam Type Selection -->
+        <div class="mb-6">
+          <label class="block font-semibold text-gray-600 mb-2"
+            >إختر نوع الاختبار</label
+          >
+          <select
+            id="examType"
+            class="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-orange-500">
+            <option value="" disabled selected>اختر نوع الاختبار</option>
+            <option value="multiple-choice">إختيار من متعدد</option>
+            <option value="true/false">صح أو خطأ</option>
+          </select>
+        </div>
+
+        <form id="examForm" class="space-y-4">
+          <!-- Exam Title -->
+          <div>
+            <label for="examTitle" class="block font-semibold text-gray-600"
+              >اسم المادة</label
+            >
+            <input
+              type="text"
+              id="examTitle"
+              class="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-orange-500"
+              placeholder="إدخل اسم المادة"
+              required />
+          </div>
+          <!-- Exam Timer -->
+          <div>
+            <label for="examTimer" class="block font-semibold text-gray-600"
+              >مدة الاختبار (دقائق)</label
+            >
+            <input
+              type="number"
+              id="examTimer"
+              class="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-orange-500"
+              placeholder="مدة الاختبار (e.g., 60)"
+              min="1"
+              required />
+          </div>
+
+          <!-- Questions Section -->
+          <div id="questionsContainer" class="space-y-4">
+            <h2 class="text-xl font-semibold text-gray-700">الاسئلة</h2>
+          </div>
+
+          <!-- Add Question Button -->
+          <button
+            id="addQuestionBtn"
+            type="button"
+            class="px-4 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600">
+            إضافة سؤال
+          </button>
+
+          <!-- Submit Button -->
+          <button
+            type="submit"
+            class="w-full px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600">
+            حفظ التعديلات
+          </button>
+        </form>
+      </div>
+      <script src="/prod/editExam.prod.js"></script>
+    </body>
+  </body>
+</html>

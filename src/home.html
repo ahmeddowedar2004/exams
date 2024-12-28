@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exam Library - Home</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/framework.css" />
+    <link rel="stylesheet" href="/css/build.min.css" />
+    <style>
+      header {
+        max-height: 65px;
+      }
+    </style>
+  </head>
+  <body class="font-sans bg-gray-100">
+    <!-- Header -->
+    <header class="bg-[#69015a] text-white p-4 shadow-md">
+      <div class="container mx-auto flex justify-between items-center">
+        <a href="/"><h1 class="text-2xl font-bold">Domaz exams</h1></a>
+        <nav class="space-x-4">
+          <a href="/" class="hover:underline ml-4">الرئيسية</a>
+          <a href="/login" class="hover:underline">تسجيل الدخول</a>
+          <a href="/profile" class="hover:underline">حسابي</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-fuchsia-100 text-center py-40">
+      <h2 class="text-4xl font-bold text-[#69015a]">بوابتك للتفوق</h2>
+      <p class="text-gray-700 mt-4">
+        أنشئ وحل الاختبارات الالكترونية وشاركها مع طلابك
+      </p>
+      <div class="mt-6 space-x-4">
+        <a
+          href="/register"
+          class="px-6 py-3 bg-[#69015a] text-white rounded hover:bg-[#69015a]"
+          >سجل دخول</a
+        >
+        <a
+          href="#subjects"
+          class="px-6 py-3 bg-gray-200 text-gray-500 rounded hover:bg-gray-300"
+          >تصفح المواد</a
+        >
+      </div>
+    </section>
+
+    <!-- Subjects Section -->
+    <section id="subjects" class="container mx-auto py-12">
+      <h3 class="text-2xl font-semibold text-center mb-8">تصفح المواد</h3>
+      <div
+        id="subjectsContainer"
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-xl font-semibold text-right">
+        <!-- Subjects loaded dynamically here -->
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#100122] text-gray-400 p-6 text-center">
+      <p>&copy; 2024 Exam Library. All Rights Reserved.</p>
+    </footer>
+    <script src="/prod/index.prod.js"></script>
+  </body>
+</html>

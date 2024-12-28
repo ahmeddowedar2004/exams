@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exam Results</title>
+    <link rel="stylesheet" href="/css/build.min.css" />
+  </head>
+
+  <body class="bg-gray-100 text-gray-800">
+    <div class="max-w-4xl mx-auto p-5">
+      <h1 class="text-2xl font-bold text-center mb-5">Exam Results</h1>
+      <div id="results" class="space-y-5"></div>
+    </div>
+
+    <script>
+      async function fetchResults(userId, examId, resultId) {
+        const response = await fetch(
+          `/results/${userId}/${examId}/${resultId}`
+        );
+        const data = await response.json();
+        return data;
+      }
+
+      function displayResults(data) {
+        const resultsDiv = document.getElementById("results");
+        console.log(data);
+        const exam = data.exam;
+        const userName = data.userName;
+        const solvedAt = data.solvedAt;
+        const examSUbject = data.examSUbject;
+        const examTitle = data.examTitle;
+
+        const percentage = Math.round(
+          (exam.score / exam.questions.length) * 100
+        );
+
+        resultsDiv.innerHTML = `
+  <div class="p-5 bg-white shadow rounded">
+      <p class="text-lg font-bold">الاسم: ${userName}</p>
+      <p class="text-sm text-gray-600">تم الحل في: ${solvedAt}</p>
+      ${
+        examTitle !== ""
+          ? `<p class="text-sm text-gray-600">عنوان الاختبار: ${examTitle}</p>`
+          : ""
+      }
+      <p class="text-sm text-gray-600">الدرجة الكلية: ${exam.score} / ${
+          exam.questions.length
+        }</p>
+      <p class="text-sm text-gray-600">الدرجة المئوية: ${percentage}%</p>
+      <p class="text-sm text-gray-600">اسم المادة: ${examSUbject}</p>
+  </div>
+  ${exam.questions
+    .map((q, index) => {
+      const isCorrect = q.correctAnswer === exam.answers[index];
+      const userAnswerColor = isCorrect
+        ? "bg-green-100 text-green-600"
+        : "bg-red-100 text-red-600";
+      const correctAnswerColor = isCorrect ? "" : "bg-green-100 text-green-600";
+      const type =
+        typeof q.correctAnswer === "boolean" ? "True/False" : "Multiple Choice";
+
+      return `
+          <div class="p-4 bg-white shadow rounded space-y-2">
+              <p class="text-lg font-semibold">${index + 1}. ${
+        q.questionText
+      }</p>
+              <p class="text-sm text-gray-500">Type: ${type}</p>
+              <div class="space-y-2">
+                  ${q.options
+                    .map(
+                      (option) => `
+                      <p class="p-2 rounded ${
+                        option === exam.answers[index]
+                          ? userAnswerColor
+                          : option === q.correctAnswer
+                          ? correctAnswerColor
+                          : "bg-gray-100"
+                      }">
+                          ${option}
+                      </p>
+                  `
+                    )
+                    .join("")}
+              </div>
+          </div>
+      `;
+    })
+    .join("")}
+`;
+      }
+      const urlPathData = location.pathname;
+      const userId = urlPathData.split("/")[2];
+      const examId = urlPathData.split("/")[3];
+      const resultId = urlPathData.split("/")[4];
+      fetchResults(userId, examId, resultId).then((data) => {
+        displayResults(data);
+      });
+    </script>
+  </body>
+</html>

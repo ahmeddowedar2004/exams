@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>الاختبارات الالكترونيه</title>
+    <link rel="stylesheet" href="/css/exam.css" />
+    <style>
+      body {
+        position: relative;
+      }
+      .loader1.active {
+        height: 20px;
+        aspect-ratio: 4;
+        --_g: no-repeat radial-gradient(farthest-side, #000 90%, #0000);
+        background: var(--_g) left, var(--_g) right;
+        background-size: 25% 100%;
+        display: grid;
+        color: red;
+      }
+      .loader1.active:before,
+      .loader1.active:after {
+        content: "";
+        height: inherit;
+        aspect-ratio: 1;
+        grid-area: 1/1;
+        margin: auto;
+        border-radius: 50%;
+        transform-origin: -100% 50%;
+        background: #000;
+        animation: l49 1s infinite linear;
+      }
+      .loader1.active:after {
+        transform-origin: 200% 50%;
+        --s: -1;
+        animation-delay: -0.5s;
+      }
+
+      @keyframes l49 {
+        58%,
+        100% {
+          transform: rotate(calc(var(--s, 1) * 1turn));
+        }
+      }
+      .loaderContainer.active {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        right: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #fff;
+        z-index: 1000;
+      }
+    </style>
+  </head>
+  <body dir="rtl">
+    <div class="loaderContainer">
+      <div class="loader1"></div>
+    </div>
+
+    <main class="main">
+      <header class="header">
+        <nav class="navbar">
+          <a href="/">الرئيسيه</a>
+        </nav>
+        <a href="/" class="logo">Domaz</a>
+      </header>
+
+      <div class="container">
+        <section class="quiz-section">
+          <div class="quiz-box">
+            <h1>Domaz Tech</h1>
+            <div class="quiz-header">
+              <span id="subjectName">subjectName</span>
+
+              <span class="question-total">1 / 5</span>
+            </div>
+            <div class="quiz-timer"></div>
+
+            <h2 class="question-text"></h2>
+            <div class="option-list"></div>
+            <div class="quiz-footer">
+              <button class="prev-btn">السابق</button>
+              <button class="next-btn">التالي</button>
+            </div>
+          </div>
+          <div class="result-box">
+            <h2>نتيجة الاختبار</h2>
+            <div class="precentage-container">
+              <div class="circular-progress">
+                <span class="progress-value">0% </span>
+              </div>
+              <span class="score-text"> </span>
+            </div>
+            <div class="buttons">
+              <button class="tryAgain-btn">اعادة الاختبار</button>
+              <button class="home-btn">الرئيسيه</button>
+              <div>
+                <buuton class="showresultBtn">عرض نتائج الاختبار</buuton>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="section home">
+          <div class="home-content">
+            <h1>اختبارات Domaz</h1>
+            <p>اختبر مذاكرتك مع Domaz</p>
+            <p>الاختبار على الفصل الاول فقط</p>
+            <button class="start-btn">ابدأ الآن</button>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <div class="popup-info">
+      <h2>قبل البدء</h2>
+      <span class="info">
+        1. يُرجى بدء الاختبار بعد المذاكره لتحقيق أقصى استفاده ممكنه
+      </span>
+      <span class="info">
+        2. لا يزال الموقع تجريبياً، قد تواجه بعض الأخطاء
+      </span>
+      <span class="info">
+        3. يُمكنك المساهمه في وضع الاختبارات او في ابداء رآيك
+        <a href="https://wa.me/message/UDACV5PQYNLUI1">من هنا</a>
+      </span>
+      <span class="info"> 4. مدة الاختبار ساعه واحده </span>
+      <span class="info"> 5. عدد الاسئله 49 سؤال </span>
+      <span class="info">
+        5. لتحقيق أقصى استفاده مترجعش للكتاب غير بعد ما تحل السؤال بنفسك الاول
+      </span>
+      <span class="info"> وأخيراً وفقكم الله جميعاً <br /></span>
+      <div class="btn-group">
+        <button class="info-btn continue-btn">الاستمرار</button>
+        <button class="info-btn exit-btn">الخروج</button>
+      </div>
+    </div>
+    <script src="/prod/exam.prod.js"></script>
+  </body>
+</html>

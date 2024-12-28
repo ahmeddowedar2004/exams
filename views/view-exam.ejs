@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>View Exam</title>
+    <link rel="stylesheet" href="/css/build.min.css" />
+    <style>
+      .correct {
+        background-color: #d4edda;
+        color: #155724;
+        padding: 0.5rem;
+        border-radius: 4px;
+      }
+      .option {
+        padding: 0.5rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-top: 0.25rem;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100">
+    <div class="container mx-auto py-8">
+      <h1 class="text-3xl font-bold mb-6">Exam Details</h1>
+      <div class="bg-white shadow-md rounded-lg p-6">
+        <h2 class="text-2xl font-semibold mb-4"><%= exam.title %></h2>
+        <p class="text-sm text-gray-600 mb-4">Owner: <%= exam.name %></p>
+        <p class="text-sm text-gray-600 mb-4">
+          Status: <%= exam.isApproved ? 'Approved' : 'Pending Approval' %>
+        </p>
+        <h3 class="text-lg font-medium mb-4">Questions:</h3>
+        <ul class="list-none">
+          <% exam.questions.forEach((question, index) => { %>
+          <li class="mb-4">
+            <p class="font-semibold">
+              <%= index + 1 %>. <%= question.questionText %>
+            </p>
+            <ul class="list-none ml-4">
+              <% question.options.forEach((option, optionIndex) => { %>
+              <li
+                class="option <%= question.correctAnswer === option ? 'correct' : '' %>">
+                <%= option %>
+              </li>
+              <% }); %>
+            </ul>
+          </li>
+          <% }); %>
+        </ul>
+        <a
+          href="/admin/all-exams"
+          class="mt-4 inline-block bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">
+          Back to All Exams
+        </a>
+      </div>
+    </div>
+  </body>
+</html>
